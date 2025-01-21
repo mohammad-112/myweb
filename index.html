@@ -207,9 +207,27 @@
             color: white;
         }
 
-        @media (min-width: 768px) {
+        /* إخفاء الأزرار في الأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .box {
+                display: none !important;
+            }
+
+            /* تظهر الأيقونة فقط في الأجهزة المحمولة */
+            .menu-icon {
+                display: block;
+            }
+
+            /* إخفاء القائمة المنبثقة في الهواتف */
             .menu {
                 display: none !important;
+            }
+        }
+
+        /* تظهر الأزرار في الأجهزة المكتبية */
+        @media (min-width: 768px) {
+            .box {
+                display: block !important;
             }
 
             .menu-icon {
@@ -218,23 +236,6 @@
 
             nav {
                 display: block;
-            }
-
-            /* إخفاء الأزرار في الأجهزة المحمولة */
-            .box {
-                display: block;
-            }
-        }
-
-        /* تظهر الأيقونة فقط في الأجهزة المحمولة */
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-
-            /* إخفاء الأزرار في الهواتف */
-            .box {
-                display: none;
             }
         }
     </style>
