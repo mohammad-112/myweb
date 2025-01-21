@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد زيدان</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333333;
+            direction: rtl;
+        }
+        
+        header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            padding: 12px 20px;
+            background-color: #3f51b5;
+            border: 2px solid #3f51b5;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: #1a237e;
+            color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .box {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .box:hover {
+            background-color: #1a237e;
+        }
+        
+        .content {
+            display: none;
+            background-color: #f1f1f1;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #3f51b5;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        #login-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        #login-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        #login-form button {
+            background-color: #3f51b5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        #login-form button:hover {
+            background-color: #1a237e;
+        }
+        
+        #main-content {
+            display: none;
+        }
+        
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .menu-icon div {
+            width: 30px;
+            height: 4px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        .menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        
+        .menu a:hover {
+            color: #ffca28;
+        }
+        
+        .menu.open {
+            display: block;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #3f51b5;
+            color: white;
+        }
+        
+        @media (min-width: 768px) {
+            .menu {
+                display: none !important;
+            }
+            .menu-icon {
+                display: none;
+            }
+            nav {
+                display: block;
+            }
+        }
+        /* تظهر الأيقونة فقط في الأجهزة المحمولة */
+        
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h1>محمد زيدان</h1>
+    </header>
+
+    <div class="menu" id="sideMenu">
+        <a href="#" onclick="showSection('home')">الرئيسية</a>
+        <a href="#" onclick="showSection('about')">عن الموقع</a>
+        <a href="#" onclick="showSection('services')">خدماتنا</a>
+        <a href="#" onclick="showSection('contact')">تواصل معنا</a>
+        <a href="#" onclick="showSection('programming-languages')">لغات البرمجة</a>
+    </div>
+
+    <div id="login-form">
+        <h2>تسجيل الدخول</h2>
+        <input type="text" id="username" placeholder="اسم المستخدم" required>
+        <input type="password" id="password" placeholder="كلمة المرور" required>
+        <button onclick="login()">تسجيل الدخول</button>
+        <p id="error-message" style="color: red; display: none;">اسم المستخدم أو كلمة المرور غير صحيحة</p>
+    </div>
+
+    <div id="main-content">
+        <nav>
+            <a href="#" onclick="showSection('home')">الرئيسية</a>
+            <a href="#" onclick="showSection('about')">عن الموقع</a>
+            <a href="#" onclick="showSection('services')">خدماتنا</a>
+            <a href="#" onclick="showSection('contact')">تواصل معنا</a>
+            <a href="#" onclick="showSection('programming-languages')">لغات البرمجة</a>
+        </nav>
+
+        <main>
+            <div id="home" class="section active">
+                <h2>الرئيسية</h2>
+                <p>مرحباً بكم في موقعنا. نحن نقدم أفضل الخدمات لعملائنا الكرام.</p>
+                <p>هدفنا هو تلبية توقعاتكم وتقديم تجربة فريدة ومميزة عبر حلول مبتكرة.</p>
+                <p>اكتشف المزيد من خلال تصفح الأقسام الأخرى.</p>
+            </div>
+
+            <div id="about" class="section">
+                <h2>عن الموقع</h2>
+                <p>هذا الموقع تم تصميمه لتلبية احتياجاتك وتوفير أفضل تجربة ممكنة.</p>
+                <p>نحن نركز على تقديم محتوى ذو جودة عالية وحلول عملية تساعدك على تحقيق أهدافك بسهولة.</p>
+                <p>ابق على اطلاع دائم بكل جديد من خلال متابعة مدونتنا.</p>
+            </div>
+
+            <div id="services" class="section">
+                <h2>خدماتنا</h2>
+                <p>نحن نقدم مجموعة متنوعة من الخدمات التي تلبي جميع احتياجاتك.</p>
+                <p>بعض خدماتنا تشمل التصميم، البرمجة، والتسويق الرقمي.</p>
+                <p>نتعهد بالتميز في كل ما نقدمه من خدمات لضمان رضا العملاء.</p>
+            </div>
+
+            <div id="contact" class="section">
+                <h2>تواصل معنا</h2>
+                <p>للتواصل معنا، يرجى إرسال رسالة عبر البريد الإلكتروني أو الاتصال بنا.</p>
+                <p>البريد الإلكتروني: info@example.com</p>
+                <p>الهاتف: +123 456 7890</p>
+                <p>نسعد بالرد على استفساراتكم ومساعدتكم في أسرع وقت ممكن.</p>
+            </div>
+
+            <div id="programming-languages" class="section">
+                <h2>لغات البرمجة</h2>
+                <p>إليك بعض لغات البرمجة مع مميزاتها:</p>
+                <table>
+                    <tr>
+                        <th>اللغة</th>
+                        <th>المميزات</th>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>سهلة الاستخدام، واسعة الانتشار، تتيح التفاعل مع واجهات المستخدم.</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>لغة مرنة، تستخدم في الذكاء الاصطناعي، تطوير الويب، وتحليل البيانات.</td>
+                    </tr>
+                    <tr>
+                        <td>C++</td>
+                        <td>قوية وسريعة، تُستخدم في تطوير البرمجيات المعقدة، وألعاب الفيديو.</td>
+                    </tr>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 محمد زيدان - جميع الحقوق محفوظة.
+    </footer>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // بيانات تسجيل الدخول الصحيحة
+            const correctUsername = "admin";
+            const correctPassword = "1234";
+
+            if (username === correctUsername && password === correctPassword) {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            menu.classList.toggle('open');
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
