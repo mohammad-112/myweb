@@ -219,12 +219,22 @@
             nav {
                 display: block;
             }
+
+            /* إخفاء الأزرار في الأجهزة المحمولة */
+            .box {
+                display: block;
+            }
         }
 
         /* تظهر الأيقونة فقط في الأجهزة المحمولة */
         @media (max-width: 768px) {
             .menu-icon {
                 display: block;
+            }
+
+            /* إخفاء الأزرار في الهواتف */
+            .box {
+                display: none;
             }
         }
     </style>
